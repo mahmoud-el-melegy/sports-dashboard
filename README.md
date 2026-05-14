@@ -1,73 +1,149 @@
-# React + TypeScript + Vite
+# ⚽ Sports Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A live sports dashboard built with React that pulls real-time data from the API-Football API. Track standings, upcoming fixtures, and top scorers across the top European football leagues.
 
-Currently, two official plugins are available:
+🔗 **[Live Demo](https://your-deployment-url.vercel.app)** <!-- Replace after deploying -->
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+![Dashboard Preview](./screenshots/preview.png) <!-- Add after building -->
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- 🏆 **League Standings** — Full table with points, wins, losses, and a bar chart visualization
+- 📅 **Fixtures** — Upcoming and recent matches grouped by date
+- 🥅 **Top Scorers** — Ranked list with goals, assists, team, and player photos
+- 🌍 **League Switcher** — Toggle between Premier League, La Liga, Serie A, and more
+- 🌙 **Dark Mode** — Full dark/light theme toggle
+- 📱 **Responsive** — Works on mobile and desktop
+- ⚡ **Smart Caching** — API responses cached with React Query to avoid rate limit hits
+- 💀 **Loading Skeletons** — No jarring spinners; smooth skeleton loaders throughout
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+| Layer | Technology |
+|---|---|
+| Framework | React 18 + Vite |
+| Styling | TailwindCSS |
+| Data Fetching | React Query |
+| Charts | Recharts |
+| Routing | React Router v6 |
+| API | [API-Football](https://www.api-football.com/) |
+| Deployment | Vercel |
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 📦 Getting Started
+
+### Prerequisites
+- Node.js 18+
+- A free API key from [api-football.com](https://www.api-football.com/)
+
+### Installation
+
+```bash
+# Clone the repo
+git clone https://github.com/YOUR_USERNAME/sports-dashboard.git
+cd sports-dashboard
+
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env
+# Add your API key to .env
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Environment Variables
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Create a `.env` file in the root:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```env
+VITE_API_KEY=your_api_football_key_here
+VITE_API_BASE_URL=https://v3.football.api-sports.io
 ```
+
+### Run Locally
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+---
+
+## 📁 Project Structure
+
+```
+sports-dashboard/
+├── src/
+│   ├── components/       # Reusable UI components (Navbar, Skeleton, Charts)
+│   ├── pages/            # Standings, Fixtures, TopScorers
+│   ├── hooks/            # Custom React Query hooks
+│   ├── services/         # Axios API layer
+│   └── main.jsx
+├── public/
+├── .env.example
+└── README.md
+```
+
+---
+
+## 🌐 Supported Leagues
+
+| League | ID |
+|---|---|
+| Premier League | 39 |
+| La Liga | 140 |
+| Serie A | 135 |
+| Bundesliga | 78 |
+| Ligue 1 | 61 |
+
+---
+
+## 🔌 API Usage
+
+This project uses [API-Football](https://www.api-football.com/) via RapidAPI. The free tier allows **100 requests/day**, which is enough for development. Responses are cached with React Query to minimize unnecessary calls.
+
+Key endpoints used:
+- `GET /standings` — League table
+- `GET /fixtures` — Match schedule
+- `GET /players/topscorers` — Top scorers by league/season
+
+---
+
+## 🚢 Deployment
+
+Deploy instantly to Vercel:
+
+```bash
+npm install -g vercel
+vercel --prod
+```
+
+Add your `VITE_API_KEY` as an environment variable in the Vercel dashboard.
+
+---
+
+## 🗺️ Roadmap
+
+- [ ] Live score updates with polling
+- [ ] Team detail page with form guide
+- [ ] Player profile pages
+- [ ] Search functionality
+- [ ] Favorite teams/leagues saved to localStorage
+
+---
+
+## 🤔 Why I Built This
+
+I wanted a project that combines real-time data, data visualization, and a clean UI — all things that matter in a production frontend role. API-Football gave me rich, structured data to work with, and it was a great excuse to get hands-on with React Query's caching strategies and Recharts for dynamic charting.
+
+---
+
+## 📄 License
+
+MIT — feel free to fork and build on this.
