@@ -30,13 +30,14 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors ${
+                className={`relative inline-flex items-center px-1 pt-1 text-sm font-medium transition-colors group h-16 ${
                   location.pathname === link.path
-                    ? 'border-indigo-500 text-gray-900 dark:text-white'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:border-gray-600'
+                    ? 'text-gray-900 dark:text-white'
+                    : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
                 }`}
               >
                 {link.name}
+                <span className={`absolute bottom-0 left-0 h-0.5 w-full bg-indigo-500 transform transition-transform duration-300 origin-left ${location.pathname === link.path ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
               </Link>
             ))}
           </div>

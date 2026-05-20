@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLeague } from '../contexts/LeagueContext';
 import { useTopScorers } from '../hooks/useTopScorers';
 import Skeleton from '../components/ui/Skeleton';
@@ -30,29 +30,7 @@ interface PlayerStats {
   }>;
 }
 
-const PlayerImage = ({ src, alt }: { src: string; alt: string }) => {
-  const [loaded, setLoaded] = useState(false);
-  const [error, setError] = useState(false);
-
-  if (error) {
-    return <Skeleton variant="circle" className="flex-shrink-0" />;
-  }
-
-  return (
-    <div className="relative w-12 h-12 flex-shrink-0">
-      {!loaded && <Skeleton variant="circle" className="absolute inset-0" />}
-      <img
-        src={src}
-        alt={alt}
-        onLoad={() => setLoaded(true)}
-        onError={() => setError(true)}
-        className={`w-12 h-12 rounded-full object-cover transition-opacity duration-300 ${
-          loaded ? 'opacity-100' : 'opacity-0'
-        }`}
-      />
-    </div>
-  );
-};
+import ImageWithFallback from '../components/ui/ImageWithFallback';
 
 const TopScorers: React.FC = () => {
   const { selectedLeagueId, selectedSeason } = useLeague();
@@ -93,7 +71,7 @@ const TopScorers: React.FC = () => {
   const scorers: PlayerStats[] = data?.response || [];
 
   return (
-    <div className="p-4 sm:p-6 max-w-4xl mx-auto">
+    <div className="p-4 sm:p-6 max-w-4xl mx-auto animate-fade-in">
       <div className="bg-white dark:bg-gray-800 shadow-md rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-700">
         <div className="p-5 sm:p-6 border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50">
           <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
@@ -135,7 +113,7 @@ const TopScorers: React.FC = () => {
                   <div className={rankClass}>{index + 1}</div>
                 </div>
 
-                <PlayerImage src={player.photo} alt={player.name} />
+                <ImageWithFallback src={player.photo} alt={player.name} fallbackType="player" className="w-12 h-12 flex-shrink-0 rounded-full overflow-hidden" />
 
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-col sm:flex-row sm:items-center gap-0.5 sm:gap-2">
@@ -148,10 +126,11 @@ const TopScorers: React.FC = () => {
                   </div>
 
                   <div className="flex items-center gap-2 mt-1 sm:mt-0.5">
-                    <img
+                    <ImageWithFallback
                       src={stats.team.logo}
                       alt={stats.team.name}
-                      className="w-4 h-4 object-contain"
+                      fallbackType="team"
+                      className="w-4 h-4 flex-shrink-0 rounded-full overflow-hidden"
                     />
                     <span className="text-xs font-medium text-gray-600 dark:text-gray-300 truncate">
                       {stats.team.name}

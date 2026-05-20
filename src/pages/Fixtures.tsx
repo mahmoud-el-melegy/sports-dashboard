@@ -3,6 +3,7 @@ import { useLeague } from '../contexts/LeagueContext';
 import { useFixtures } from '../hooks/useFixtures';
 import Skeleton from '../components/ui/Skeleton';
 import ErrorMessage from '../components/ui/ErrorMessage';
+import ImageWithFallback from '../components/ui/ImageWithFallback';
 
 interface FixtureData {
   fixture: {
@@ -94,7 +95,7 @@ const Fixtures: React.FC = () => {
   }
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
+    <div className="space-y-8 animate-fade-in">
       {/* Filter Bar */}
       <div className="flex flex-wrap gap-2">
         {(['All', 'Upcoming', 'Results'] as FilterType[]).map(f => (
@@ -141,7 +142,7 @@ const Fixtures: React.FC = () => {
                   >
                     {/* Home Team */}
                     <div className="flex flex-col items-center flex-1 text-center gap-2">
-                      <img src={match.teams.home.logo} alt={match.teams.home.name} className="w-12 h-12 object-contain" loading="lazy" />
+                      <ImageWithFallback src={match.teams.home.logo} alt={match.teams.home.name} fallbackType="team" className="w-12 h-12 flex-shrink-0" />
                       <span className="font-semibold text-sm text-gray-900 dark:text-white line-clamp-2">
                         {match.teams.home.name}
                       </span>
@@ -189,7 +190,7 @@ const Fixtures: React.FC = () => {
 
                     {/* Away Team */}
                     <div className="flex flex-col items-center flex-1 text-center gap-2">
-                      <img src={match.teams.away.logo} alt={match.teams.away.name} className="w-12 h-12 object-contain" loading="lazy" />
+                      <ImageWithFallback src={match.teams.away.logo} alt={match.teams.away.name} fallbackType="team" className="w-12 h-12 flex-shrink-0" />
                       <span className="font-semibold text-sm text-gray-900 dark:text-white line-clamp-2">
                         {match.teams.away.name}
                       </span>

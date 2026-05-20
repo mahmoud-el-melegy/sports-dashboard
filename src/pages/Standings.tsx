@@ -3,6 +3,7 @@ import { useLeague } from '../contexts/LeagueContext';
 import { useStandings } from '../hooks/useStandings';
 import Skeleton from '../components/ui/Skeleton';
 import ErrorMessage from '../components/ui/ErrorMessage';
+import ImageWithFallback from '../components/ui/ImageWithFallback';
 import {
   BarChart,
   Bar,
@@ -87,7 +88,7 @@ const Standings: React.FC = () => {
   const totalTeams = standings.length;
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
+    <div className="space-y-8 animate-fade-in">
       <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden">
         <div className="p-6 border-b border-gray-100 dark:border-gray-800">
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">League Table</h2>
@@ -119,11 +120,11 @@ const Standings: React.FC = () => {
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
-                      <img 
+                      <ImageWithFallback 
                         src={s.team.logo} 
                         alt={s.team.name} 
-                        className="w-8 h-8 object-contain"
-                        loading="lazy"
+                        fallbackType="team"
+                        className="w-8 h-8 flex-shrink-0"
                       />
                       <span className="font-semibold text-gray-900 dark:text-white whitespace-nowrap">
                         {s.team.name}

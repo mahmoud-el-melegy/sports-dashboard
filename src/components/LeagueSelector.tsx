@@ -13,7 +13,7 @@ export default function LeagueSelector() {
           .no-scrollbar::-webkit-scrollbar { display: none; }
           .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         `}</style>
-        <div className="flex flex-row items-center justify-between py-3 gap-3">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between py-3 gap-3 sm:gap-4">
           <div className="flex overflow-x-auto gap-2 sm:gap-4 items-center no-scrollbar flex-1">
             {leagues.map((league) => (
               <button
