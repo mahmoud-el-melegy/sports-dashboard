@@ -13,28 +13,35 @@ export const SUPPORTED_LEAGUES: League[] = [
   { id: 61, name: 'Ligue 1' },
 ];
 
+export const SUPPORTED_SEASONS: number[] = Array.from(
+  { length: 2025 - 2006 + 1 },
+  (_, i) => 2025 - i
+);
+
 interface LeagueContextType {
   selectedLeagueId: number;
   setSelectedLeagueId: (id: number) => void;
-  season: number;
-  setSeason: (season: number) => void;
+  selectedSeason: number;
+  setSelectedSeason: (season: number) => void;
   leagues: League[];
+  seasons: number[];
 }
 
 const LeagueContext = createContext<LeagueContextType | undefined>(undefined);
 
 export const LeagueProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [selectedLeagueId, setSelectedLeagueId] = useState<number>(39); // Default to Premier League (id: 39)
-  const [season, setSeason] = useState<number>(2024); // Default season to 2024
+  const [selectedSeason, setSelectedSeason] = useState<number>(2024); // Default season to 2024
 
   return (
     <LeagueContext.Provider
       value={{
         selectedLeagueId,
         setSelectedLeagueId,
-        season,
-        setSeason,
+        selectedSeason,
+        setSelectedSeason,
         leagues: SUPPORTED_LEAGUES,
+        seasons: SUPPORTED_SEASONS,
       }}
     >
       {children}

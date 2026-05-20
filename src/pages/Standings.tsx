@@ -36,8 +36,8 @@ interface StandingTeam {
 }
 
 const Standings: React.FC = () => {
-  const { selectedLeagueId, season } = useLeague();
-  const { data, isLoading, isError } = useStandings(selectedLeagueId, season);
+  const { selectedLeagueId, selectedSeason } = useLeague();
+  const { data, isLoading, isError, error } = useStandings(selectedLeagueId, selectedSeason);
 
   const standings: StandingTeam[] = useMemo(() => {
     if (data?.response?.[0]?.league?.standings?.[0]) {
@@ -74,7 +74,7 @@ const Standings: React.FC = () => {
   }
 
   if (isError || !data) {
-    return <ErrorMessage message="Failed to load standings. Please try again later." />;
+    return <ErrorMessage message={(error as Error)?.message || "Failed to load standings. Please try again later."} />;
   }
 
   const chartData = standings.map(s => ({

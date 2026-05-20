@@ -7,6 +7,20 @@ const api = axios.create({
   },
 });
 
+const handleResponse = (response: any) => {
+  const data = response.data;
+  if (data.errors) {
+    if (typeof data.errors === 'object' && Object.keys(data.errors).length > 0) {
+      const errorMessage = Object.values(data.errors).join(', ');
+      throw new Error(errorMessage);
+    }
+    if (Array.isArray(data.errors) && data.errors.length > 0) {
+      throw new Error(data.errors[0] as string);
+    }
+  }
+  return data;
+};
+
 export const getStandings = async (leagueId: number, season: number) => {
   const response = await api.get('/standings', {
     params: {
@@ -14,7 +28,7 @@ export const getStandings = async (leagueId: number, season: number) => {
       season: season,
     },
   });
-  return response.data;
+  return handleResponse(response);
 };
 
 export const getFixtures = async (leagueId: number, season: number) => {
@@ -24,7 +38,7 @@ export const getFixtures = async (leagueId: number, season: number) => {
       season: season,
     },
   });
-  return response.data;
+  return handleResponse(response);
 };
 
 export const getTopScorers = async (leagueId: number, season: number) => {
@@ -34,5 +48,5 @@ export const getTopScorers = async (leagueId: number, season: number) => {
       season: season,
     },
   });
-  return response.data;
+  return handleResponse(response);
 };

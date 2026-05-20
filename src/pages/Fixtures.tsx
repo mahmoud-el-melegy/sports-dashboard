@@ -30,8 +30,8 @@ const FINISHED_STATUSES = ['FT', 'AET', 'PEN'];
 const UPCOMING_STATUSES = ['NS', 'TBD'];
 
 const Fixtures: React.FC = () => {
-  const { selectedLeagueId, season } = useLeague();
-  const { data, isLoading, isError } = useFixtures(selectedLeagueId, season);
+  const { selectedLeagueId, selectedSeason } = useLeague();
+  const { data, isLoading, isError, error } = useFixtures(selectedLeagueId, selectedSeason);
   const [filter, setFilter] = useState<FilterType>('All');
 
   const fixtures: FixtureData[] = useMemo(() => {
@@ -90,7 +90,7 @@ const Fixtures: React.FC = () => {
   }
 
   if (isError || !data) {
-    return <ErrorMessage message="Failed to load fixtures. Please try again later." />;
+    return <ErrorMessage message={(error as Error)?.message || "Failed to load fixtures. Please try again later."} />;
   }
 
   return (

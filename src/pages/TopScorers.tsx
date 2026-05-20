@@ -55,8 +55,8 @@ const PlayerImage = ({ src, alt }: { src: string; alt: string }) => {
 };
 
 const TopScorers: React.FC = () => {
-  const { selectedLeagueId, season } = useLeague();
-  const { data, isLoading, isError } = useTopScorers(selectedLeagueId, season);
+  const { selectedLeagueId, selectedSeason } = useLeague();
+  const { data, isLoading, isError, error } = useTopScorers(selectedLeagueId, selectedSeason);
 
   if (isLoading) {
     return (
@@ -85,7 +85,7 @@ const TopScorers: React.FC = () => {
   if (isError || !data) {
     return (
       <div className="p-4 sm:p-6 max-w-4xl mx-auto">
-        <ErrorMessage message="Failed to load top scorers data. Please try again later." />
+        <ErrorMessage message={(error as Error)?.message || "Failed to load top scorers data. Please try again later."} />
       </div>
     );
   }
