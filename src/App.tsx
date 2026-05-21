@@ -7,6 +7,7 @@ import Standings from './pages/Standings';
 import Fixtures from './pages/Fixtures';
 import TopScorers from './pages/TopScorers';
 import Search from './pages/Search';
+import PlayerProfile from './pages/PlayerProfile';
 import './App.css';
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ function AppContent() {
             <Route path="/fixtures" element={<Fixtures />} />
             <Route path="/search" element={<Search />} />
             <Route path="/top-scorers" element={<TopScorers />} />
+            <Route path="/player/:id" element={<PlayerProfile />} />
           </Routes>
         </Layout>
       </Router>

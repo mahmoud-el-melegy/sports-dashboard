@@ -62,3 +62,13 @@ export const searchPlayers = async (name: string, leagueId: number, season: numb
   return handleResponse(response);
 };
 
+export const getPlayerById = async (playerId: number, season: number) => {
+  const response = await api.get('/players', {
+    params: {
+      id: playerId,
+      season: season,
+    },
+  });
+  return handleResponse(response);
+};
+

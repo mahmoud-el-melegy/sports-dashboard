@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useLeague } from '../contexts/LeagueContext';
 import { useTopScorers } from '../hooks/useTopScorers';
 import Skeleton from '../components/ui/Skeleton';
@@ -105,9 +106,10 @@ const TopScorers: React.FC = () => {
                 : 'bg-gray-50/50 dark:bg-gray-800/50';
 
             return (
-              <div
+              <Link
+                to={`/player/${player.id}`}
                 key={player.id}
-                className={`p-4 sm:p-5 flex items-center gap-3 sm:gap-5 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700/50 ${rowBg}`}
+                className={`block p-4 sm:p-5 flex items-center gap-3 sm:gap-5 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700/50 ${rowBg}`}
               >
                 <div className="flex-shrink-0 sm:mr-1">
                   <div className={rankClass}>{index + 1}</div>
@@ -180,7 +182,7 @@ const TopScorers: React.FC = () => {
                     )}
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
