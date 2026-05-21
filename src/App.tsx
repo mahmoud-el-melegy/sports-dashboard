@@ -6,6 +6,7 @@ import Layout from './components/Layout';
 import Standings from './pages/Standings';
 import Fixtures from './pages/Fixtures';
 import TopScorers from './pages/TopScorers';
+import Search from './pages/Search';
 import './App.css';
 
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ function AppContent() {
           <Routes>
             <Route path="/" element={<Standings />} />
             <Route path="/fixtures" element={<Fixtures />} />
+            <Route path="/search" element={<Search />} />
             <Route path="/top-scorers" element={<TopScorers />} />
           </Routes>
         </Layout>

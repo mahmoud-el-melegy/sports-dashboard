@@ -50,3 +50,15 @@ export const getTopScorers = async (leagueId: number, season: number) => {
   });
   return handleResponse(response);
 };
+
+export const searchPlayers = async (name: string, leagueId: number, season: number) => {
+  const response = await api.get('/players', {
+    params: {
+      search: name,
+      league: leagueId,
+      season: season,
+    },
+  });
+  return handleResponse(response);
+};
+

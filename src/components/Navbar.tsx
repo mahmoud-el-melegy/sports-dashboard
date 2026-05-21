@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Search } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 
 export default function Navbar() {
@@ -10,6 +10,7 @@ export default function Navbar() {
   const navLinks = [
     { name: 'Standings', path: '/' },
     { name: 'Fixtures', path: '/fixtures' },
+    { name: 'Search', path: '/search', icon: Search },
     { name: 'Top Scorers', path: '/top-scorers' },
   ];
 
@@ -36,6 +37,7 @@ export default function Navbar() {
                     : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
                 }`}
               >
+                {link.icon && <link.icon className="h-4 w-4 mr-1.5" />}
                 {link.name}
                 <span className={`absolute bottom-0 left-0 h-0.5 w-full bg-indigo-500 transform transition-transform duration-300 origin-left ${location.pathname === link.path ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
               </Link>
@@ -74,12 +76,13 @@ export default function Navbar() {
                 key={link.name}
                 to={link.path}
                 onClick={() => setIsOpen(false)}
-                className={`block pl-3 pr-4 py-2 border-l-4 text-base font-medium ${
+                className={`flex items-center pl-3 pr-4 py-2 border-l-4 text-base font-medium ${
                   location.pathname === link.path
                     ? 'bg-indigo-50 border-indigo-500 text-indigo-700 dark:bg-gray-700 dark:border-indigo-400 dark:text-white'
                     : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200'
                 }`}
               >
+                {link.icon && <link.icon className="h-5 w-5 mr-2" />}
                 {link.name}
               </Link>
             ))}
