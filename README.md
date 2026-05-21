@@ -2,9 +2,9 @@
 
 A live sports dashboard built with React that pulls real-time data from the API-Football API. Track standings, upcoming fixtures, and top scorers across the top European football leagues.
 
-🔗 **[Live Demo](https://your-deployment-url.vercel.app)** <!-- Replace after deploying -->
+🔗 **[Live Demo](https://sports-dashboard-nu.vercel.app/)**
 
-![Dashboard Preview](./screenshots/preview.png) <!-- Add after building -->
+![Dashboard Preview](./screenshots/preview.png)
 
 ---
 
@@ -45,7 +45,7 @@ A live sports dashboard built with React that pulls real-time data from the API-
 
 ```bash
 # Clone the repo
-git clone https://github.com/YOUR_USERNAME/sports-dashboard.git
+git clone https://github.com/mahmoud-el-melegy/sports-dashboard.git
 cd sports-dashboard
 
 # Install dependencies
